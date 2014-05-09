@@ -15,9 +15,9 @@ class ExcelExtractor {
 
     public function processExcel($filename, $customernumbers_rule, $productcode_column, $start_row, $start_column)
     {
-        $productcode_column = $productcode_column - 1;
+        $productcode_column = PHPExcel_Cell::columnIndexFromString($productcode_column) - 1;
         $start_row = $start_row - 1;
-        $start_column = $start_column - 1;
+        $start_column = PHPExcel_Cell::columnIndexFromString($start_column) - 1;
 
         $excelreader = new PHPExcel_Reader_Excel2007();
         $phpexcel = $excelreader->load($filename);

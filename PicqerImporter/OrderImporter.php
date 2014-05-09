@@ -42,6 +42,9 @@ class OrderImporter {
 
         $result = $this->picqerclient->addOrder($order);
         if (isset($result['data']['idorder'])) {
+            if ($this->config['picqer-close-orders']) {
+                $this->picqerclient->closeOrder($result['data']['idorder']);
+            }
             return $result['data']['orderid'];
         } else {
             throw new \Exception('Could not create order in Picqer');
